@@ -1,7 +1,8 @@
 import turtle as t
-import tkinter
+import tkinter 
 
 class Turtle(t.Turtle):  # Extend the original functionality of Turtle
+
     def smooth_goto(self, x, y):
         self.up()
         self.goto(x, y)
@@ -13,76 +14,125 @@ class Turtle(t.Turtle):  # Extend the original functionality of Turtle
     def unglow(self, x, y):
         self.fillcolor("gray")
 
-
-
-class Pen:
-    def __init__(self, tip_length=20, pen_length=80):
-        self.tip_length = tip_length
-        self.pen_length = pen_length
-
-    def draw(self, jerry=Turtle()):
-        jerry.speed(0)
-        jerry.smooth_goto(0, 0)
-
-        jerry.begin_poly()
-
-        jerry.right(45)
-        jerry.forward(self.tip_length)
-        jerry.right(-45)
-        jerry.forward(self.pen_length)
-
-        jerry.smooth_goto(0, 0)
-
-        jerry.right(-45)
-        jerry.forward(self.tip_length)
-        jerry.right(45)
-        jerry.forward(self.pen_length)
-
-        jerry.end_poly()
-        pen_shape = jerry.get_poly()
-
-        return pen_shape
-
-
-
-class Jerry:  # Weak attempt at creating a Singleton
-    __instance = None
+    __pen_instance = None
+    __eraser = None
 
     @staticmethod
-    def getInstance():
-        if Jerry.__instance == None:
-            Jerry.__instance = Turtle()
+    def getInstance():  # Weak attempt at creating a Singleton
+        if Turtle.__pen_instance == None:
+            Turtle.__pen_instance = Turtle()
 
-            Jerry.__create_pen_shape(Jerry.__instance)
-            Jerry.__instance.shape("pen")
+            Turtle.__create_pen_shape(Turtle.__pen_instance)
+            Turtle.__pen_instance.shape("pen")
 
-            Jerry.__instance.speed(4)
+            Turtle.__pen_instance.speed(4)
 
-        return Jerry.__instance
+        return Turtle.__pen_instance
 
     @staticmethod
-    def __create_pen_shape(jerry):
+    def __create_pen_shape(turtle):
         pen = Pen()
-        pen_shape = pen.draw(jerry)
-        jerry.clear()
+        pen_shape = pen.draw(turtle)
+        turtle.clear()
 
         t.register_shape("pen", pen_shape)
 
     @staticmethod
     def prepare_for_drawing():
-        jerry = Jerry.getInstance()
+        pen = Turtle.getInstance()
 
-        jerry.smooth_goto(0, -200)
-        jerry.unglow(0, -200)
+        # Eraser
+        eraser_shape = Eraser().draw(pen)
 
-        jerry.pencolor("white")
-        jerry.pensize(5)
+        t.register_shape("eraser", eraser_shape)
+        eraser = Turtle()
+        eraser.shape("eraser")
 
-        jerry.onclick(jerry.glow)
-        jerry.onrelease(jerry.unglow)
+        eraser.smooth_goto(100, -200)
+        eraser.unglow(100, -200)
 
-        jerry.speed(0)
-        jerry.ondrag(jerry.goto)
+        eraser.pencolor("white")
+        eraser.pensize(5)
+
+        eraser.onclick(eraser.glow)
+        eraser.onrelease(eraser.unglow)
+
+        eraser.speed(0)
+        eraser.ondrag(eraser.goto)
+
+        Turtle.__eraser = eraser
+
+        # Pen
+        pen.setheading(0)
+        pen.smooth_goto(-100, -200)
+        pen.unglow(-100, -200)
+
+        pen.pencolor("black")
+        pen.pensize(5)
+
+        pen.onclick(pen.glow)
+        pen.onrelease(pen.unglow)
+
+        pen.speed(0)
+        pen.ondrag(pen.goto)
+
+
+class Pen:
+    def __init__(self, tip_length = 20, pen_length = 80, color="", x=0, y=0):
+        self.tip_length = tip_length
+        self.pen_length = pen_length
+        self.x = x
+        self.y = y
+
+    def draw(self, turtle=Turtle()):
+        turtle.speed(0)
+        turtle.smooth_goto(self.x, self.y)
+
+        turtle.begin_poly()
+
+        turtle.right(45)
+        turtle.forward(self.tip_length)
+        turtle.right(-45)
+        turtle.forward(self.pen_length)
+
+        turtle.smooth_goto(self.x, self.y)
+
+        turtle.right(-45)
+        turtle.forward(self.tip_length)
+        turtle.right(45)
+        turtle.forward(self.pen_length)
+
+        turtle.end_poly()
+        shape = turtle.get_poly()
+
+        return shape
+
+
+class Eraser:
+    def __init__(self, width = 20, height = 80, color = "", x = 0, y = 0):
+        self.width = width
+        self.height = height
+        self.color = color
+        self.x = x
+        self.y = y
+
+    def draw(self, turtle = Turtle()):
+        turtle.speed(0)
+        turtle.smooth_goto(self.x, self.y)
+        turtle.pencolor(self.color)
+
+        turtle.begin_poly()
+
+        turtle.forward(self.height)
+        turtle.right(90)
+        turtle.forward(self.width)
+        turtle.right(90)
+        turtle.forward(self.height)
+
+        turtle.end_poly()
+        shape = turtle.get_poly()
+
+        return shape
 
 
 class Flower:
@@ -96,32 +146,43 @@ class Flower:
         self.y = y
 
     def __turn_degrees(self, num_petals):
-        return 360/num_petals
+        return 360 / num_petals
 
-    def draw(self, jerry=Jerry.getInstance()):
-        jerry.smooth_goto(self.x, self.y)
+    def draw(self, turtle = Turtle.getInstance()):
+        turtle.smooth_goto(self.x, self.y)
 
-        jerry.pencolor(self.color)
-        jerry.pensize(self.petal_size)
+        turtle.pencolor(self.color)
+        turtle.pensize(self.petal_size)
 
         for _ in range(self.num_petals):
-            jerry.right(self.__turn_degrees(self.num_petals))
-            jerry.forward(self.petal_length)
-            jerry.goto(self.x, self.y)
+            turtle.right(self.__turn_degrees(self.num_petals))
+            turtle.forward(self.petal_length)
+            turtle.goto(self.x, self.y)
 
-        jerry.pencolor("orange")
-        jerry.dot()
-
-
-
+        turtle.pencolor("orange")
+        turtle.dot()
     
+    def update(self, num_petals, color, petal_length, petal_size, x, y):
+        self.num_petals = num_petals
+        self.color = color
+        self.petal_length = petal_length
+        self.petal_size = petal_size
+        self.x = x
+        self.y = y
 
-myFlower = Flower(6, "pink", 100, 40, 0, 0)
-myFlower.draw()
 
+flower = Flower(6, "pink", 100, 40, 0, 0)
 
-Jerry.prepare_for_drawing()
+assert(flower._Flower__turn_degrees(6) == 60)
+
+flower.draw()
+
+flower.update(8, "red", 160, 30, 200, -100)
+flower.draw()
+
+flower.update(10, "blue", 80, 10, -300, 100)
+flower.draw()
+
+Turtle.prepare_for_drawing()
 
 t.done()
-
-# input("Press any key to exit... ")
