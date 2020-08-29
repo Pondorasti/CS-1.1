@@ -23,6 +23,8 @@ class Turtle(t.Turtle):  # Extend the original functionality of Turtle
             Turtle.__pen_instance = Turtle()
 
             Turtle.__create_pen_shape(Turtle.__pen_instance)
+            Turtle.__create_eraser_shape(Turtle.__pen_instance)
+
             Turtle.__pen_instance.shape("pen")
 
             Turtle.__pen_instance.speed(4)
@@ -38,16 +40,22 @@ class Turtle(t.Turtle):  # Extend the original functionality of Turtle
         t.register_shape("pen", pen_shape)
 
     @staticmethod
+    def __create_eraser_shape(turtle):
+        eraser = Eraser()
+        eraser_shape = eraser.draw(turtle)
+        turtle.clear()
+
+        t.register_shape("eraser", eraser_shape)
+
+    @staticmethod
     def prepare_for_drawing():
         pen = Turtle.getInstance()
 
         # Eraser
-        eraser_shape = Eraser().draw(pen)
-
-        t.register_shape("eraser", eraser_shape)
         eraser = Turtle()
         eraser.shape("eraser")
 
+        pen.setheading(0)
         eraser.smooth_goto(100, -200)
         eraser.unglow(100, -200)
 
@@ -81,12 +89,14 @@ class Pen:
     def __init__(self, tip_length = 20, pen_length = 80, color="", x=0, y=0):
         self.tip_length = tip_length
         self.pen_length = pen_length
+        self.color = color
         self.x = x
         self.y = y
 
     def draw(self, turtle=Turtle()):
         turtle.speed(0)
         turtle.smooth_goto(self.x, self.y)
+        turtle.pencolor(self.color)
 
         turtle.begin_poly()
 
