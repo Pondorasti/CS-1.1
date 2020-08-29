@@ -1,0 +1,3 @@
+Cookie,20
+Kelpie,25
+Griffin,30
