@@ -4,5 +4,11 @@
 			"path": "."
 		}
 	],
-	"settings": {}
+	"settings": {
+		"powermode.enabled": true,
+		"powermode.enableShake": false,
+		
+		"python.linting.pylintEnabled": true,
+    	"python.linting.enabled": true,
+	}
 }

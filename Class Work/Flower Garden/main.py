@@ -1,5 +1,5 @@
 import turtle as t
-import tkinter 
+import tkinter
 
 class Turtle(t.Turtle):  # Extend the original functionality of Turtle
 
@@ -86,7 +86,7 @@ class Turtle(t.Turtle):  # Extend the original functionality of Turtle
 
 
 class Pen:
-    def __init__(self, tip_length = 20, pen_length = 80, color="", x=0, y=0):
+    def __init__(self, tip_length=20, pen_length=80, color="", x=0, y=0):
         self.tip_length = tip_length
         self.pen_length = pen_length
         self.color = color
@@ -119,14 +119,14 @@ class Pen:
 
 
 class Eraser:
-    def __init__(self, width = 20, height = 80, color = "", x = 0, y = 0):
+    def __init__(self, width=20, height=80, color="", x=0, y=0):
         self.width = width
         self.height = height
         self.color = color
         self.x = x
         self.y = y
 
-    def draw(self, turtle = Turtle()):
+    def draw(self, turtle=Turtle()):
         turtle.speed(0)
         turtle.smooth_goto(self.x, self.y)
         turtle.pencolor(self.color)
@@ -158,7 +158,7 @@ class Flower:
     def __turn_degrees(self, num_petals):
         return 360 / num_petals
 
-    def draw(self, turtle = Turtle.getInstance()):
+    def draw(self, turtle=Turtle.getInstance()):
         turtle.smooth_goto(self.x, self.y)
 
         turtle.pencolor(self.color)
@@ -171,7 +171,7 @@ class Flower:
 
         turtle.pencolor("orange")
         turtle.dot()
-    
+
     def update(self, num_petals, color, petal_length, petal_size, x, y):
         self.num_petals = num_petals
         self.color = color
