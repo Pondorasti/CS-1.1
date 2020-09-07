@@ -6,7 +6,7 @@ class Ability:
         self.max_damage = max_damage
 
     def attack(self):
-        random_value = randint(0, self.max_damage + 1)
+        random_value = randint(0, self.max_damage)
         return random_value
 
 
