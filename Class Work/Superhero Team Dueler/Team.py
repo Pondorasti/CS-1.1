@@ -26,7 +26,7 @@ class Team:
     def stats(self):
         for hero in self.heroes:
             kd = hero.kills / hero.deaths
-            print(f"{hero.name} Kill/Deaths: {kd}")
+            print(f"{hero.name} K/D: {kd}")
     
     def revive_heroes(self, health = 100):
         for hero in self.heroes:
@@ -35,15 +35,22 @@ class Team:
     def attack(self, other_team):
         living_heroes = [hero for hero in self.heroes]
         living_oponents = [hero for hero in other_team.heroes]
-
+        print(0)
         while len(living_heroes) > 0 and len(living_oponents) > 0:
+            print(1)
             current_hero = choice(living_heroes)
             current_opponent = choice(living_oponents)
-
+            print(2)
             current_hero.fight(current_opponent)
-
-            if not current_hero.is_alive():
+            print(3)
+            if not current_hero.is_alive() and not current_opponent.is_alive():
                 living_heroes.remove(current_hero)
-            if not current_opponent.is_alive():
                 living_oponents.remove(current_opponent)
-
+            elif not current_hero.is_alive():
+                living_heroes.remove(current_hero)
+            elif not current_opponent.is_alive():
+                living_oponents.remove(current_opponent)
+            else:
+                # Stalemate - both of the heroes can't fight each other
+                living_heroes.remove(current_hero)
+                living_oponents.remove(current_opponent)

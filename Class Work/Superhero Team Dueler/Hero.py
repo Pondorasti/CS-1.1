@@ -12,7 +12,7 @@ class Hero:
         self.abilities = list()
         self.armors = list()
 
-        self.deaths = 0
+        self.deaths = 1
         self.kills = 0
 
     def add_ability(self, ability):
@@ -54,6 +54,8 @@ class Hero:
         if self.abilities.count == 0 and opponent.abilities.count == 0:
             print("Stalemate")
             return
+
+        # There's also the edge case where abilities do 0 damaga
 
         # Fight until somebody dies
         while self.is_alive() and opponent.is_alive():
