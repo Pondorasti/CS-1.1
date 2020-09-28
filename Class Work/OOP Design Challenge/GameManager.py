@@ -15,6 +15,11 @@ class GameManager:
     def start(self):
         self.play_introduction_dialog()
 
+        while(True):
+            print("It's your turn")
+            print("What do you want to do?")
+            command = input()
+
     def play_introduction_dialog(self):
         system('clear')
         print("Welcome to the dungeon!")
@@ -35,25 +40,10 @@ class GameManager:
                 print("That is not a valid command.")
         
 
-    def print_map(self):
-        def print_pipes():
-            for _ in self.length:
-                print("-", end="-")
-            print("-")
-        
-        def print_row(line: int):
-
-            for column in self.length:
-                print(f"|{self.map[line][column]}", end="")
-            print("|")
-
-        for row in self.length:
-            print_pipes()
-            print_row(row)
-        print_pipes()
+    
 
 # GameManager().start()
-GameManager().print_map()
+# GameManager().print_map()
 
 
 # -----------
