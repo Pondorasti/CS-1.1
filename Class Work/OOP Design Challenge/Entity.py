@@ -3,12 +3,14 @@ from random import randint
 from Dice import Dice
 
 class Entity(ABC):
-    def __init__(self, hp: int, attack_rng: int, defense_rng: int, damage: int, armor: int):
+    @abstractmethod
+    def __init__(self, hp: int, attack_rng: int, defense_rng: int, damage: int, armor: int, shorthand_name: chr):
         self._hp = hp
         self._attack_rng = attack_rng
         self._defense_rng = defense_rng
         self._damage = damage
         self._armor = armor
+        self._shorthand_name = shorthand_name
         
     
     def defend(self, damage_to_take: int):
@@ -26,6 +28,14 @@ class Entity(ABC):
                 print(f"Attack hits, and you manage to do some damage: {damage_taken}")
                 self._hp -= damage_taken
                 # TODO: Check if dead
+    
+    @property
+    def isDead(self):
+        if self._hp < 1 :
+            print("Bu dead")
+            return True
+        else:
+            return False
 
     
 # Game Rules

@@ -18,7 +18,6 @@ class GameManager:
         while(True):
             print("It's your turn")
             print("What do you want to do?")
-            command = input()
 
     def play_introduction_dialog(self):
         system('clear')
@@ -39,9 +38,6 @@ class GameManager:
             else:
                 print("That is not a valid command.")
         
-
-    
-
 # GameManager().start()
 # GameManager().print_map()
 
