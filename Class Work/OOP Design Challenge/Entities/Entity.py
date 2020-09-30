@@ -1,8 +1,10 @@
 from abc import ABC, abstractmethod
 from random import randint
 from Dice import Dice
+from Mixins.PlaceableMixin import PlaceableMixin
+from Mixins.MovableMixin import MovableMixin
 
-class Entity(ABC):
+class Entity(ABC, PlaceableMixin):
     @abstractmethod
     def __init__(self, hp: int, attack_rng: int, defense_rng: int, damage: int, armor: int, shorthand_name: chr):
         self._hp = hp
@@ -11,7 +13,8 @@ class Entity(ABC):
         self._damage = damage
         self._armor = armor
         self._shorthand_name = shorthand_name
-        
+        self._x = 0
+        self._y = 0
     
     def defend(self, damage_to_take: int):
         rng = Dice.roll()
@@ -25,10 +28,15 @@ class Entity(ABC):
             if damage_taken <= 0:
                 print("Attack hits, but it cannot go through the armor")
             else:
-                print(f"Attack hits, and you manage to do some damage: {damage_taken}")
+                print(f"Attack hits, and you manage to do {damage_taken} damage.")
                 self._hp -= damage_taken
                 # TODO: Check if dead
     
+    def attack(self, entity):
+        entity.defend(self._damage)
+        print(f"{self._shorthand_name}: {self._hp}")
+        print(f"{entity._shorthand_name}: {entity._hp}")
+
     @property
     def isDead(self):
         if self._hp < 1 :
@@ -37,6 +45,12 @@ class Entity(ABC):
         else:
             return False
 
+    def move_to(self, x: int, y: int):
+        self._x = x
+        self._y = y
+        print(self._x)
+        print(self._y)
+    
     
 # Game Rules
 

@@ -7,7 +7,7 @@ class GameManager:
 
         for i in self.length:
             map.append([])
-            for j in self.length:
+            for _ in self.length:
                 map[i].append(0)
         
         self.map = map
