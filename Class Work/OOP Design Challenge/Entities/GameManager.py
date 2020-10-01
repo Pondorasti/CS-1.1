@@ -10,7 +10,7 @@ class GameManager:
         self.play_introduction_dialog()
         
         while(True):
-            print("It's your turn")
+            print("\nIt's your turn")
             print("What do you want to do?")
             print()
 
