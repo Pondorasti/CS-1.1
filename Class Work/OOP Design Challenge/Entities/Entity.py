@@ -17,7 +17,6 @@ class Entity(ABC, PlaceableMixin):
         self._defense_rng = defense_rng
         self._damage = damage
         self._armor = armor
-        self._shorthand_name = shorthand_name
 
         self._x = 0
         self._y = 0

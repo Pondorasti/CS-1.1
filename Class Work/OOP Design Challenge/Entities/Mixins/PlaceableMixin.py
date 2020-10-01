@@ -10,3 +10,6 @@ class PlaceableMixin():
     
     def inspect(self):
         print(self._inspect_info)
+    
+    def get_short_name(self):
+        return self._shorthand_name

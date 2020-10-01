@@ -1,6 +1,7 @@
 from random import randint
 from Hero import Hero
 from Monster import Monster
+from Tile import Tile
 
 class Map:
     def __init__(self):
@@ -14,22 +15,21 @@ class Map:
             columns = 0
             for cell in line:
                 if cell == '0':
-                    map[rows].append('0')
+                    map[rows].append(Tile(rows, columns, "0"))
                 elif cell == 'H':
                     map[rows].append(Hero(rows, columns))
                 elif cell == 'M':
                     map[rows].append(Monster(rows, columns))
                 elif cell == 'D':
-                    map[rows].append('D')
+                    map[rows].append(Tile(rows, columns, "D"))
                 elif cell == 'C':
-                    map[rows].append('C')
+                    map[rows].append(Tile(rows, columns, "C"))
                 elif cell == '|':
-                    map[rows].append('|')
+                    map[rows].append(Tile(rows, columns, "|"))
                 elif cell == '-':
-                    map[rows].append('-')
+                    map[rows].append(Tile(rows, columns, "-"))
                 
                 columns += 1
-
             rows += 1
         
         file.close()
@@ -40,7 +40,7 @@ class Map:
     def print_map(self):
         for row in range(self.number_of_rows):
             for column in range(self.number_of_columns):
-                print(f"{self.map[row][column]}", end="")
+                print(f"{self.map[row][column].get_short_name()}", end="")
             print()
 
 Map().print_map()
