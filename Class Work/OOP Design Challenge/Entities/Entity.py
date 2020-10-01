@@ -55,9 +55,6 @@ class Entity(ABC, PlaceableMixin):
     def move_to(self, x: int, y: int):
         self._x = x
         self._y = y
-        print(self._x)
-        print(self._y)
-    
     
 # Game Rules
 

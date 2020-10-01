@@ -1,24 +1,23 @@
 from os import system
 from CommandLine import CommandLine
+from Map import Map
 
 class GameManager:
-    def __init__(self):
-        map = []
-        self.length = range(5)
-
-        for i in self.length:
-            map.append([])
-            for _ in self.length:
-                map[i].append(0)
-        
-        self.map = map
+    def __init__(self):        
+        self.map = Map()
         
     def start(self):
         self.play_introduction_dialog()
-
+        
         while(True):
             print("It's your turn")
             print("What do you want to do?")
+            print()
+
+            command = input().lower()
+            
+            system('clear')
+            CommandLine.parse(command)
 
     def play_introduction_dialog(self):
         system('clear')
@@ -27,20 +26,19 @@ class GameManager:
         print()
         print("Type 'start' to begin your adventure")
         print("Type 'tutorial' to get a brief introduction")
-
         
-        while(True):
-            command = input().lower()
-            # CommandLine.parse(command)
+        # while(True):
+        #     command = input().lower()
+        #     CommandLine.parse(command)
             
-            if command == 'tutorial':
-                print(command)
-            elif command == 'start':
-                print(command)
-            else:
-                print("That is not a valid command.")
+        #     if command == 'tutorial':
+        #         print(command)
+        #     elif command == 'start':
+        #         print(command)
+        #     else:
+        #         print("That is not a valid command.")
         
-# GameManager().start()
+GameManager().start()
 # GameManager().print_map()
 
 

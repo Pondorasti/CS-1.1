@@ -8,7 +8,6 @@ class Hero(Entity):
         
         self._shorthand_name = "H"
 
-
 # alex = Hero(0, 0)
 # tristan = Hero(0, 0)
 # brian = Hero(0, 0)
