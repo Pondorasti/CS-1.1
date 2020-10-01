@@ -11,16 +11,18 @@ from Mixins.MovableMixin import MovableMixin
 
 class Entity(ABC, PlaceableMixin):
     @abstractmethod
-    def __init__(self, hp: int, attack_rng: int, defense_rng: int, damage: int, armor: int, shorthand_name: chr):
+    def __init__(self, hp: int, attack_rng: int, defense_rng: int, damage: int, armor: int):
         self._hp = hp
         self._attack_rng = attack_rng
         self._defense_rng = defense_rng
         self._damage = damage
         self._armor = armor
         self._shorthand_name = shorthand_name
+
         self._x = 0
         self._y = 0
         self._inspect_info = ""
+        self._shorthand_name = ""
     
     def defend(self, damage_to_take: int):
         rng = Dice.roll()

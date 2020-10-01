@@ -11,13 +11,14 @@ class Map:
         map = []
         for line in file:
             map.append([])
+            columns = 0
             for cell in line:
                 if cell == '0':
                     map[rows].append('0')
                 elif cell == 'H':
-                    map[rows].append('H')
+                    map[rows].append(Hero(rows, columns))
                 elif cell == 'M':
-                    map[rows].append('M')
+                    map[rows].append(Monster(rows, columns))
                 elif cell == 'D':
                     map[rows].append('D')
                 elif cell == 'C':
@@ -26,6 +27,8 @@ class Map:
                     map[rows].append('|')
                 elif cell == '-':
                     map[rows].append('-')
+                
+                columns += 1
 
             rows += 1
         
