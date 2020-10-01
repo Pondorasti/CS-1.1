@@ -1,13 +1,8 @@
-
-
 from abc import ABC, abstractmethod
 from random import randint
 from Dice import Dice
 from Mixins.PlaceableMixin import PlaceableMixin
 from Mixins.MovableMixin import MovableMixin
-
-# sys.path.append(os.path.abspath('../other_sub_dir'))
-# import filename_without_py_extension
 
 class Entity(ABC, PlaceableMixin):
     @abstractmethod
