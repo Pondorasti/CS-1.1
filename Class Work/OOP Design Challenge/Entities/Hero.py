@@ -9,4 +9,5 @@ class Hero(Entity):
 
 # alex = Hero(0, 0)
 # tristan = Hero(0, 0)
+# brian = Hero(0, 0)
 # alex.attack(tristan)

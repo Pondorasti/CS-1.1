@@ -1,4 +1,6 @@
 from random import randint
+from Hero import Hero
+from Monster import Monster
 
 class Map:
     def __init__(self):

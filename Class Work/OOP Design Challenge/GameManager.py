@@ -1,4 +1,5 @@
 from os import system
+from CommandLine import CommandLine
 
 class GameManager:
     def __init__(self):
@@ -30,6 +31,7 @@ class GameManager:
         
         while(True):
             command = input().lower()
+            # CommandLine.parse(command)
             
             if command == 'tutorial':
                 print(command)

@@ -1,8 +1,13 @@
+
+
 from abc import ABC, abstractmethod
 from random import randint
 from Dice import Dice
 from Mixins.PlaceableMixin import PlaceableMixin
 from Mixins.MovableMixin import MovableMixin
+
+# sys.path.append(os.path.abspath('../other_sub_dir'))
+# import filename_without_py_extension
 
 class Entity(ABC, PlaceableMixin):
     @abstractmethod
@@ -15,6 +20,7 @@ class Entity(ABC, PlaceableMixin):
         self._shorthand_name = shorthand_name
         self._x = 0
         self._y = 0
+        self._inspect_info = ""
     
     def defend(self, damage_to_take: int):
         rng = Dice.roll()
