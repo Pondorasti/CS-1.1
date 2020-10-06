@@ -20,6 +20,7 @@ class Map:
                     map[rows].append(Tile(rows, columns, "0"))
                 elif cell == 'H':
                     self._hero = Hero(rows, columns)
+                    
                     CommandLine.add_argument("move", "-n", "--north", "Moves your character forward", self._move_forward_hero)
                     CommandLine.add_argument("move", "-s", "--south", "Moves your character backward", self._move_backward_hero)
                     CommandLine.add_argument("move", "-w", "--west", "Moves your character left", self._move_left_hero)
@@ -82,5 +83,3 @@ class Map:
         if self._map[x][y]._shorthand_name == '0':
             return True
         return False
-
-# Map().print_map()

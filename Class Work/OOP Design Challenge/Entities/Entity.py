@@ -8,7 +8,7 @@ class Entity(ABC, PlaceableMixin):
     @abstractmethod
     def __init__(self, hp: int, attack_rng: int, defense_rng: int, damage: int, armor: int):
         self._hp = hp
-        self._attack_rng = attack_rng
+        self._attack_rng = attack_rng 
         self._defense_rng = defense_rng
         self._damage = damage
         self._armor = armor
